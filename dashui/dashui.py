@@ -8,6 +8,7 @@ import PyQt5.QtGui as gui
 
 import logging
 import sys
+import socket
 
 default_url = "127.0.0.1"
 default_port = 8050
@@ -48,6 +49,15 @@ class DashUI(object):
         self.view.setZoomFactor(zoomFactor)
         self.view.resize(*resize)
         self.showMaximized = showMaximized
+
+    @staticmethod
+    def get_open_port():
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.bind(("",0))
+        s.listen(1)
+        port = s.getsockname()[1]
+        s.close()
+        return port
 
     def run(self):
         self.run_dash()

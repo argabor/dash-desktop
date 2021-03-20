@@ -5,10 +5,12 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
+port = DashUI.get_open_port()
+
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-ui = DashUI(app, app_name='DashUI test', showMaximized=False, resize=(600, 250)) # Create a DashUI instance
+ui = DashUI(app, port=port, app_name='DashUI test', showMaximized=False, resize=(600, 250)) # Create a DashUI instance
 
 app.layout = html.Div([
     html.H1("DashUI test!"),
